@@ -44,12 +44,16 @@ class DisplayManager:
         return max(0, min((screen_x - self.board_margin_left) // self.collum_width, settings.BOARD_ROW))
 
     def display_end_screen(self,winner):
-        text = self.font.render(f"{winner} HAS WON!", 1,"white")
-        text_rect = text.get_rect(center=(settings.WINDOW_WIDTH // 2, settings.WINDOW_HEIGHT//2))
+        winner_text = self.font.render(f"{winner} HAS WON!", 1,"white")
+        winner_text_rect = winner_text.get_rect(center=(settings.WINDOW_WIDTH // 2, settings.WINDOW_HEIGHT//2))
+        restart_text = self.font.render(f"click anywhere to restart", 1,"white")
+        restart_text_rect = restart_text.get_rect(center=(settings.WINDOW_WIDTH // 2, 100))
+
 
         s = pygame.Surface((settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT))
         s.set_alpha(192)
         s.fill((0,0,0))
 
         self.screen.blit(s, (0,0))
-        self.screen.blit(text, text_rect)
+        self.screen.blit(winner_text, winner_text_rect)
+        self.screen.blit(restart_text, restart_text_rect)
