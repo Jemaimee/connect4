@@ -7,5 +7,5 @@ class Cell(Enum):
 
 class GameState(Enum):
     RUNNING = 0
-    STOPPED = 1
-    WIN = 2
+    NOT_STARTED = 1
+    GAME_OVER = 2

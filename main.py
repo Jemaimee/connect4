@@ -13,7 +13,7 @@ clock = pygame.time.Clock()
 running = True
 display = DisplayManager(screen)
 game = Game()
-game.start()
+
 
 while running:
     for event in pygame.event.get():
@@ -26,18 +26,15 @@ while running:
                 if collum != None:
                     game.grid.drop_piece(game.player, int(collum))
                     game.switch_turn()
-        if (event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN) and game.gamestate == GameState.WIN:
+        if event.type == pygame.MOUSEBUTTONDOWN and game.gamestate != GameState.RUNNING:
             game.start()
 
     screen.fill(settings.BACKGROUND_COLOR)
+
     if game.gamestate == GameState.RUNNING:
         game.check_game_state()
 
-    display.draw(game.grid.board)
-    if game.gamestate == GameState.WIN:
-        display.display_end_screen(game.winner)
-
-
+    display.draw(game.grid.board, game.gamestate, game.winner)
 
     pygame.display.flip()
 

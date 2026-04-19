@@ -8,7 +8,7 @@ class Game:
     def __init__(self):
         self.grid = Grid()
         self.player = None
-        self.gamestate = GameState.STOPPED
+        self.gamestate = GameState.NOT_STARTED
         self.winner = None
 
     def start(self):
@@ -37,6 +37,8 @@ class Game:
         columns = len(self.grid.board[0])
         rows = len(self.grid.board)
 
+        self.check_draw()
+
         for y in range(rows):
             for x in range(columns):
 
@@ -60,12 +62,15 @@ class Game:
                             break
                     if winning:
                         self.winner = player.name
-                        self.gamestate = GameState.WIN
-
+                        self.gamestate = GameState.GAME_OVER
+    def check_draw(self):
+        if not Cell.EMPTY in self.grid.board[0]:
+            self.gamestate = GameState.GAME_OVER
 
 class Grid:
     def __init__(self):
         self.board = None
+        self.create_board()
 
     def add_piece(self, color, y, x):
         self.board[y][x] = color
