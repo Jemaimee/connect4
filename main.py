@@ -24,8 +24,7 @@ while running:
             if event.button == 1:
                 collum = display.screen_to_collum(event.pos[0])
                 if collum != None:
-                    game.grid.drop_piece(game.player, int(collum))
-                    game.switch_turn()
+                    game.play(int(collum))
         if event.type == pygame.MOUSEBUTTONDOWN and game.gamestate != GameState.RUNNING:
             game.start()
 

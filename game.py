@@ -67,6 +67,11 @@ class Game:
         if not Cell.EMPTY in self.grid.board[0]:
             self.gamestate = GameState.GAME_OVER
 
+    def play(self, collum):
+        if self.grid.ensure_not_full(collum):
+            self.grid.drop_piece(self.player, collum)
+            self.switch_turn()
+
 class Grid:
     def __init__(self):
         self.board = None
@@ -80,6 +85,12 @@ class Grid:
             if line[x] == Cell.EMPTY:
                 line[x] = color
                 break
+
+    def ensure_not_full(self, x):
+        for line in self.board:
+            if line[x] == Cell.EMPTY:
+                return True
+        return False
 
     def create_board(self):
         self.board =  [[Cell.EMPTY for j in range(7)] for i in range(6)]
