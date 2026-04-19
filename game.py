@@ -1,5 +1,4 @@
-from enum import Enum
-
+import settings
 from enums import Cell, GameState
 
 
@@ -93,6 +92,6 @@ class Grid:
         return False
 
     def create_board(self):
-        self.board =  [[Cell.EMPTY for j in range(7)] for i in range(6)]
+        self.board =  [[Cell.EMPTY for j in range(settings.BOARD_COLUMN)] for i in range(settings.BOARD_ROW)]
 
 
